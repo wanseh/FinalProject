@@ -116,8 +116,8 @@ public class Queue
 		else{
 			
 			System.out.println("Send to");
+			head.bal = head.bal - cost;
 			ChangeUser();
-			tail.bal = tail.bal - amount - fee;
 			System.out.println("Sending "+ amount +" will incur a " + fee + " fee. Continue?");
 			promptEnterKey();
 			head.bal = head.bal + amount;
