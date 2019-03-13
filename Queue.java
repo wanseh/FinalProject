@@ -5,19 +5,19 @@ public class Queue
   public Node head;
   public Node tail;
   public int size;
-  Scanner input = new Scanner(System.in);
+  static Scanner input = new Scanner(System.in);
   static String[] namelog = new String[100];
   static String[] actionlog = new String[100];
   static float[] balancelog = new float[100];
+  static String[] namelogcopy = new String[100];
+  static String[] actionlogcopy = new String[100];
+  static float[] balancelogcopy = new float[100];
   static int counter = 0;
   public Queue()
   {
     this.head = null;
     this.tail = null;
     this.size = 0;
-	//this.headA = null;
-    //this.tailA = null;
-   // this.sizeA = 0;
 	
   }
     public void Add(String input){
@@ -176,13 +176,52 @@ public class Queue
 		balancelog[counter]=balance;
 	}
 	public void ViewLog(){
-		System.out.println(counter);
+		System.out.println("Total logs: "+counter);
 			for(int i = 1;i <= counter ; i++){
 				System.out.println(actionlog[i]);
 				System.out.println(namelog[i]);
 				System.out.println(balancelog[i]);
 			}
   }
+	public static void Search(){
+		System.out.println("Search by name: *case sensitive*");
+		String searchVal = input.nextLine();
+		for(int i = 0; i < 100 ;i++){
+			if((searchVal).equals(namelog[i])){
+				System.out.println(actionlog[i]);
+				System.out.println(namelog[i]);
+				System.out.println(balancelog[i]);
+			}
+		}
+	}
+	public static void ViewLogSortedAsc(){
+		System.arraycopy(balancelog,0,balancelogcopy,0,balancelog.length);
+		System.arraycopy(namelog,0,namelogcopy,0,namelog.length);
+		System.arraycopy(actionlog,0,actionlogcopy,0,actionlog.length);
+		System.out.print(actionlogcopy[1]);
+		for(int x = 0;x <= counter ;x++){
+			for(int y = x+1; y <= counter ;y++){
+				if(balancelogcopy[x]>balancelogcopy[y]){
+					float temp=balancelogcopy[y];
+					String tempA=namelogcopy[y];
+					String tempB=actionlogcopy[y];
+						balancelogcopy[y]=balancelogcopy[x];
+						namelogcopy[y]=namelogcopy[x];
+						actionlogcopy[y]=actionlogcopy[x];
+						balancelogcopy[x]=temp;
+						namelogcopy[x]=tempA;
+						actionlogcopy[x]=tempB;
+				}
+			}
+		}
+		System.out.println("Total logs: "+counter);
+			for(int i = 1;i <= counter ; i++){
+				System.out.println(actionlogcopy[i]);
+				System.out.println(namelogcopy[i]);
+				System.out.println(balancelogcopy[i]);
+			}		
+	}
+
 	public static void promptEnterKey(){
 		System.out.println("Press ENTER to continue...");
 		Scanner scanner = new Scanner(System.in);
