@@ -1,16 +1,24 @@
 import java.util.Scanner;
-
+import java.io.*;
 public class Queue
 {
   public Node head;
   public Node tail;
   public int size;
-	Scanner input = new Scanner(System.in);
+  Scanner input = new Scanner(System.in);
+  static String[] namelog = new String[100];
+  static String[] actionlog = new String[100];
+  static float[] balancelog = new float[100];
+  static int counter = 0;
   public Queue()
   {
     this.head = null;
     this.tail = null;
     this.size = 0;
+	//this.headA = null;
+    //this.tailA = null;
+   // this.sizeA = 0;
+	
   }
     public void Add(String input){
   	Node newNode = new Node();
@@ -43,14 +51,34 @@ public class Queue
       tail.link = newNode;
       tail = newNode;
     }
-	AddToLog("Registered new user " + head.name );
+	counter++;
+	AddToLog(tail.name, tail.bal, "Registered user");
+	
+  	this.size++;
+  }
+    public void AddNameBalA(String input, float balance){
+  	Node newNode = new Node();
+    newNode.name = input;
+	newNode.bal = balance;
+  	if(head == null)
+    {
+      head = newNode;
+      tail = newNode;
+    }
+    else
+    {
+      newNode.link = null;
+      tail.link = newNode;
+      tail = newNode;
+    }
 	
   	this.size++;
   }
 	//Deletes the current user
   public void DelCurUser()
   {
-	
+	counter++;
+	AddToLog(head.name, head.bal, "Deleted account");
     if(head == null)
     {
       System.out.println("---------------------------------------");
@@ -61,6 +89,21 @@ public class Queue
       head = head.link;
       this.size--;
     }
+
+  }
+  public void DelCurUserA()
+  {
+    if(head == null)
+    {
+      System.out.println("---------------------------------------");
+      System.out.println("No existing users.");
+    }
+    else
+    {
+      head = head.link;
+      this.size--;
+    }
+
   }
   //Displays contents of the list
   public void Display()
@@ -102,8 +145,8 @@ public class Queue
 		}
   }
 	public void backoftheline(){
-	  AddNameBal(head.name, head.bal);
-	  DelCurUser();
+	  AddNameBalA(head.name, head.bal);
+	  DelCurUserA();
 	}
 	public void SendMoney(){
 		System.out.println("How much money would you like to send?");
@@ -112,7 +155,7 @@ public class Queue
 		float cost = amount + fee;
 		System.out.println("Sending "+ amount +" will incur a " + fee + " fee. Continue?");
 		promptEnterKey();
-		if(amount > head.bal){
+		if(cost > head.bal){
 			System.out.println("Insufficient Funds");
 		}
 		else{
@@ -121,29 +164,24 @@ public class Queue
 			ChangeUser();
 			promptEnterKey();
 			head.bal = head.bal + amount;
-			AddToLog("Recieved Money from " + tail.name);
 		}
+		counter++;
+		AddToLog(tail.name, amount, "Sent Money");
+		counter++;
+		AddToLog(head.name, amount, "Recieved Money");
 	}
-	public void AddToLog(String act){
-		head.Log = tail.name;
-		head.LogBal = tail.bal;
-		head.Action = act;
-
+	public void AddToLog(String name, float balance, String Action){
+		namelog[counter]=name;
+		actionlog[counter]=Action;
+		balancelog[counter]=balance;
 	}
 	public void ViewLog(){
-		Node pointer;
-		pointer = this.head;
-		if(head != null){
-			for(int i = 0; pointer != null; i++){
-				System.out.println(pointer.Action);
-				System.out.println(pointer.Log);
-				System.out.println(pointer.LogBal);
-				pointer = pointer.link;
+		System.out.println(counter);
+			for(int i = 1;i <= counter ; i++){
+				System.out.println(actionlog[i]);
+				System.out.println(namelog[i]);
+				System.out.println(balancelog[i]);
 			}
-		}
-		else{
-		System.out.println("No logs to display.");
-		}
   }
 	public static void promptEnterKey(){
 		System.out.println("Press ENTER to continue...");
