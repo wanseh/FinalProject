@@ -28,15 +28,7 @@ public class MoneyTransfer{
 					System.out.println(q.head.bal);
 				}
 			linethingy();
-			System.out.println("0 - Exit Program");
-			System.out.println("1 - Close Current Account");
-			System.out.println("2 - Register New User");
-			System.out.println("3 - Change User");
-			System.out.println("4 - Send Money");
-			System.out.println("5 - Display All Existing Users");
-			System.out.println("6 - Logs");
-			System.out.println("7 - Sort Logs");
-			System.out.println("8 - Search Logs");
+			menu();
 			linethingy();
 			
 	
@@ -74,10 +66,24 @@ public class MoneyTransfer{
 				case 8:linethingy();
 						q.Search();
 						break;
+					
+				default: System.out.println("Invalid");
+                     			break;
 			}
 		}
 	}
 	public static void linethingy(){
 			System.out.println("---------------------------------------");
 		}
+	public static void menu(){
+			System.out.println("0 - Exit Program");
+			System.out.println("1 - Close Current Account");
+			System.out.println("2 - Register New User");
+			System.out.println("3 - Change User");
+			System.out.println("4 - Send Money");
+			System.out.println("5 - Display All Existing Users");
+			System.out.println("6 - Logs");
+			System.out.println("7 - Sort Logs");
+			System.out.println("8 - Search Logs");
+	}
 }
