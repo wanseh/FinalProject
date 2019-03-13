@@ -110,15 +110,14 @@ public class Queue
 		float amount = input.nextFloat();
 		float fee = amount*0.01f;
 		float cost = amount + fee;
+		System.out.println("Sending "+ amount +" will incur a " + fee + " fee. Continue?");
 		if(amount > head.bal){
 			System.out.println("Insufficient Funds");
 		}
 		else{
-			
 			System.out.println("Send to");
 			head.bal = head.bal - cost;
 			ChangeUser();
-			System.out.println("Sending "+ amount +" will incur a " + fee + " fee. Continue?");
 			promptEnterKey();
 			head.bal = head.bal + amount;
 			AddToLog("Recieved Money from " + tail.name);
