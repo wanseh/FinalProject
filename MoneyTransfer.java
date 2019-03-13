@@ -1,19 +1,19 @@
+/**
+*		Names: DJ Renzo Emmanuel Bince
+*			   Sheil Ann Ashely Bruas
+*			   Lance Parantar
+*
+*		Section CC12/CC13 - CCA
+*		Money Transfer Program
+*
+*/
 import java.util.Scanner;
 import java.io.*;
 public class MoneyTransfer{
 	public static void main(String[] args) throws IOException{
 		
 		Queue q = new Queue();
-		/*Scanner in = new Scanner(new File("database.txt"));
-		PrintWriter out = null;
-		while(in.hasNextLine()){
-			q.Add(in.nextLine());		
-		}
-		while(in.hasNextFloat()){
-			q.AddBal(in.nextFloat());		
-		}*/
 		Scanner input = new Scanner(System.in);
-		//Scanner add = new Scanner(System.in);
 		boolean repeater = true;
 		int potato = 0;
 		while(repeater){
@@ -35,6 +35,8 @@ public class MoneyTransfer{
 			System.out.println("4 - Send Money");
 			System.out.println("5 - Display All Existing Users");
 			System.out.println("6 - Logs");
+			System.out.println("7 - Sort Logs");
+			System.out.println("8 - Search Logs");
 			linethingy();
 			
 	
@@ -43,12 +45,6 @@ public class MoneyTransfer{
 		
 			switch(potato){
 				case 0: repeater = false;
-						//out = new PrintWriter("database.txt");
-						//while(q.head != null){
-						//	out.println(q.head.name);
-						//	q.head = q.head.link;
-						//}
-						//out.close();
 						break;
 				case 1: linethingy();
 						q.DelCurUser();
@@ -71,7 +67,13 @@ public class MoneyTransfer{
 						break;
 				case 6:linethingy();
 						q.ViewLog();
-						
+						break;
+				case 7:linethingy();
+						q.ViewLogSortedAsc();
+						break;
+				case 8:linethingy();
+						q.Search();
+						break;
 			}
 		}
 	}
