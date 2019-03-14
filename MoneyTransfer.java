@@ -52,7 +52,11 @@ public class MoneyTransfer{
 						q.ChangeUser();
 						break;
 				case 4:linethingy();
+				      if(q.head != null){
 						q.SendMoney();
+					  }else{
+						  System.out.println("No Registered user");
+					  }
 						break;
 				case 5:linethingy();
 						q.Display();
@@ -61,14 +65,17 @@ public class MoneyTransfer{
 						q.ViewLog();
 						break;
 				case 7:linethingy();
+					  if(q.head != null){
 						q.ViewLogSortedAsc();
+						}else{
+						 System.out.println("Nothing to be Sorted");
+						}
 						break;
 				case 8:linethingy();
 						q.Search();
 						break;
-					
 				default: System.out.println("Invalid");
-                     			break;
+                    				 break;
 			}
 		}
 	}
